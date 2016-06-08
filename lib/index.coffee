@@ -161,7 +161,8 @@ module.exports = (opts) ->
           type.filters,
           content_type: type.id,
           include: 10,
-          locale: type.locale
+          locale: type.locale,
+          limit: 1000
           )
         )
       )
