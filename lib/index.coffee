@@ -34,6 +34,10 @@ module.exports = (opts) ->
     space: opts.space_id
 
   class RootsContentful
+    _sleep = (ms) ->
+      start = new Date().getTime()
+      continue while new Date().getTime() - start < ms
+
     constructor: (@roots) ->
       @util = new RootsUtil(@roots)
       @roots.config.locals ?= {}
@@ -157,6 +161,8 @@ module.exports = (opts) ->
 
     fetch_content = (type) ->
       W(
+        if opts.preview
+          _sleep 100
         client.entries(_.merge(
           type.filters,
           content_type: type.id,
